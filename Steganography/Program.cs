@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 namespace Steganography
 {
@@ -6,8 +7,14 @@ namespace Steganography
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
-            Console.WriteLine("Test");
+            FileModel fileModel;
+
+            if (args.Length == 0)
+                fileModel = new FileModel(string.Empty);
+            else if (args.Length == 1)
+                fileModel = new FileModel(args[0]);
+            else
+                Console.WriteLine("Неверное число аргументов!");
         }
     }
 }
