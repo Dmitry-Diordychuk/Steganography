@@ -1,0 +1,13 @@
+C:\Users\ebona\Dropbox\Защита информации\LAB2\Steganography\Steganography\bin\Debug\netcoreapp3.1\Steganography.exe
+C:\Users\ebona\Dropbox\Защита информации\LAB2\Steganography\Steganography\bin\Debug\netcoreapp3.1\Steganography.deps.json
+C:\Users\ebona\Dropbox\Защита информации\LAB2\Steganography\Steganography\bin\Debug\netcoreapp3.1\Steganography.runtimeconfig.json
+C:\Users\ebona\Dropbox\Защита информации\LAB2\Steganography\Steganography\bin\Debug\netcoreapp3.1\Steganography.runtimeconfig.dev.json
+C:\Users\ebona\Dropbox\Защита информации\LAB2\Steganography\Steganography\bin\Debug\netcoreapp3.1\Steganography.dll
+C:\Users\ebona\Dropbox\Защита информации\LAB2\Steganography\Steganography\bin\Debug\netcoreapp3.1\Steganography.pdb
+C:\Users\ebona\Dropbox\Защита информации\LAB2\Steganography\Steganography\obj\Debug\netcoreapp3.1\Steganography.csprojAssemblyReference.cache
+C:\Users\ebona\Dropbox\Защита информации\LAB2\Steganography\Steganography\obj\Debug\netcoreapp3.1\Steganography.csproj.CoreCompileInputs.cache
+C:\Users\ebona\Dropbox\Защита информации\LAB2\Steganography\Steganography\obj\Debug\netcoreapp3.1\Steganography.AssemblyInfoInputs.cache
+C:\Users\ebona\Dropbox\Защита информации\LAB2\Steganography\Steganography\obj\Debug\netcoreapp3.1\Steganography.AssemblyInfo.cs
+C:\Users\ebona\Dropbox\Защита информации\LAB2\Steganography\Steganography\obj\Debug\netcoreapp3.1\Steganography.dll
+C:\Users\ebona\Dropbox\Защита информации\LAB2\Steganography\Steganography\obj\Debug\netcoreapp3.1\Steganography.pdb
+C:\Users\ebona\Dropbox\Защита информации\LAB2\Steganography\Steganography\obj\Debug\netcoreapp3.1\Steganography.genruntimeconfig.cache
