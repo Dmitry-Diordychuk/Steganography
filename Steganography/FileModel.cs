@@ -1,3 +1,14 @@
+/******************************************************************************/
+/*                                                                            */
+/*                         File: FileModel.cs                                 */
+/*                   Created By: Dmitry Diordichuk                            */
+/*                        Email: cort@mail.ru                                 */
+/*                                                                            */
+/*                 File Created: 18th April 2020 7:36:48 pm                   */
+/*                Last Modified: 20th April 2020 8:16:55 am                   */
+/*                                                                            */
+/******************************************************************************/
+
 using System;
 using System.IO;
 
@@ -5,7 +16,9 @@ namespace					Steganography
 {
 	public class			FileModel
 	{
+		private bool		InitFlag { get; set; } = false;
 		public string		FullPath { get; set; }
+		public byte[]		FileContent { get; set; }
 		public				FileModel(string _fullPath)
 		{
 			if (_fullPath == string.Empty)
@@ -14,6 +27,7 @@ namespace					Steganography
 				FullPath = _fullPath;
 			else
 				FullPath = TryInitPath();
+			InitFlag = true;
 		}
 		private string		TryInitPath()
 		{
@@ -54,5 +68,22 @@ namespace					Steganography
 				return (false);
 			}
 		}
+		public void			ReadFile()
+		{
+			if (InitFlag)
+			{
+				try
+				{
+					FileContent = File.ReadAllBytes(this.FullPath);
+				}
+				catch (Exception ex)
+				{
+					Console.WriteLine($"Исключение: {ex.Message}");
+					Environment.Exit(0);
+				}
+			}
+			FileContent = null;
+		}
+
 	}
 }
