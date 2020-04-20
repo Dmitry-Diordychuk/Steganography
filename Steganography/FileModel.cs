@@ -82,8 +82,8 @@ namespace					Steganography
 					Environment.Exit(0);
 				}
 			}
-			FileContent = null;
+			else
+				FileContent = null;
 		}
-
 	}
 }

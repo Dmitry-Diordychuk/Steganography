@@ -18,7 +18,8 @@ namespace Steganography
     {
         static void Main(string[] args)
         {
-            FileModel fileModel;
+            FileModel   fileModel;
+            BMPModel    bMPModel;
 
             fileModel = null;
             if (args.Length == 0)
@@ -28,8 +29,10 @@ namespace Steganography
             else
                 Console.WriteLine("Неверное число аргументов!");
             if (fileModel != null)
+            {
                 fileModel.ReadFile();
-
+                bMPModel = new BMPModel(fileModel.FileContent);
+            }
         }
     }
 }
