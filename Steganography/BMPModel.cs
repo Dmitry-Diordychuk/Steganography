@@ -12,6 +12,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace	Steganography
 {
@@ -77,10 +78,10 @@ namespace	Steganography
 		}
 		public byte[]		ConcealMessage(string message, byte[] bytes)
 		{
-			int w;
-			int p;
-			int n;
-			int padding;
+			int			w;
+			int			p;
+			int			n;
+			int			padding;
 			BitArray	bitMessage;
 			byte		mask;
 
@@ -113,6 +114,74 @@ namespace	Steganography
 				}
 			}
 			return (bytes);
+		}
+		private byte		BitArrayToByte(BitArray bits)
+		{
+			if (bits.Count != 8)
+			{
+				throw new ArgumentException("Количество бит не соответствует 8!");
+			}
+			byte[] bytes = new byte[1];
+			bits.CopyTo(bytes, 0);
+			return (bytes[0]);
+		}
+		private string		BitArrayToStr(List<bool> bitList)
+		{
+			List<bool> oneByte = new List<bool>();
+			List<char> str = new List<char>();
+
+			for (int i = 0; i < bitList.Count; i++)
+			{
+				oneByte.Add(bitList[i]);
+				if (oneByte.Count == 8)
+				{
+					str.Add((char)BitArrayToByte(new BitArray(oneByte.ToArray())));
+					oneByte.Clear();
+					if (str.Last() == '#')
+					{
+						str.Remove('#');
+						break;
+					}
+				}
+			}
+			string result = new string(str.ToArray());
+			return (result);
+		}
+		public string		RevealMessage(byte[] bytes)
+		{
+			int			w;
+			int			p;
+			int			n;
+			int			padding;
+			List<bool>	bitMessage = new List<bool>();
+			byte		mask;
+
+			mask = (byte)1;
+			w = 0;
+			p = 0;
+			n = 0;
+			padding = 0;
+			for (int i = 0; i < bytes.Length - Offset; i++)
+			{
+				p = (i - 2 * padding) % 3;
+				if (p == 1)
+				{
+					if ((bytes[Offset + i] & mask) == 1)
+						bitMessage.Add(true);
+					else if ((bytes[Offset + i] & mask) == 0)
+						bitMessage.Add(false);
+					n++;
+				}
+				if (p == 2)
+					w++;
+				if (w == Width)
+				{
+					i = i + 2;
+					padding++;
+					w = 0;
+				}
+			}
+			return (BitArrayToStr(bitMessage));
 		}
 	}
 }

@@ -38,6 +38,11 @@ namespace					Steganography
 			{
 				Console.WriteLine("Введите полный путь к файлу:");
 				path = Console.ReadLine();
+				if (path[0] == '"')
+				{
+					path = path.Remove(0,1);
+					path = path.Remove(path.Length - 1);
+				}
 			}
 			return (path);
 		}
@@ -52,7 +57,7 @@ namespace					Steganography
 			fileInfo = new FileInfo(_fullPath);
 			if (fileInfo.Exists)
 			{
-				if (fileInfo.Extension == ".bmp")
+				if (fileInfo.Extension == ".bmp" || fileInfo.Extension == ".BMP")
 				{
 					return (true);
 				}
@@ -89,7 +94,7 @@ namespace					Steganography
 		{
 			for (int i = 1; i < 5; i ++)
 				FullPath.Remove(FullPath.Length - i);
-			File.WriteAllBytes(FullPath + "_stega.bmp", this.FileContent);
+			File.WriteAllBytes(FullPath.Remove(FullPath.Length - 4) + "_stega.bmp", this.FileContent);
 		}
 	}
 }
