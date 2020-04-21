@@ -85,5 +85,11 @@ namespace					Steganography
 			else
 				FileContent = null;
 		}
+		public void			WriteFile()
+		{
+			for (int i = 1; i < 5; i ++)
+				FullPath.Remove(FullPath.Length - i);
+			File.WriteAllBytes(FullPath + "_stega.bmp", this.FileContent);
+		}
 	}
 }

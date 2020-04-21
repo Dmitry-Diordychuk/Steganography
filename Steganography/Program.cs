@@ -19,9 +19,11 @@ namespace Steganography
         static void Main(string[] args)
         {
             FileModel   fileModel;
-            BMPModel    bMPModel;
+            BMPModel    bmpModel;
+            string      message;
 
             fileModel = null;
+            bmpModel = null;
             if (args.Length == 0)
                 fileModel = new FileModel(string.Empty);
             else if (args.Length == 1)
@@ -31,8 +33,13 @@ namespace Steganography
             if (fileModel != null)
             {
                 fileModel.ReadFile();
-                bMPModel = new BMPModel(fileModel.FileContent);
+                bmpModel = new BMPModel(fileModel.FileContent);
             }
+            Console.WriteLine("Введите сообщение для шифрования.");
+            Console.WriteLine($"Максимальная длина {(bmpModel.Height * bmpModel.Width - 1)/8}");
+            message = Console.ReadLine();
+            fileModel.FileContent = bmpModel.ConcealMessage(message, fileModel.FileContent);
+            fileModel.WriteFile();
         }
     }
 }

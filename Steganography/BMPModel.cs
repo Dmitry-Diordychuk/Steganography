@@ -10,6 +10,7 @@
 /******************************************************************************/
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace	Steganography
@@ -22,7 +23,7 @@ namespace	Steganography
 		public int		Width { get; set; }
 		public int		Height { get; set; }
 
-		public	BMPModel(byte[] bytes)
+		public				BMPModel(byte[] bytes)
 		{
 			List<byte> offsetAr = new List<byte>();
 			List<byte> width = new List<byte>();
@@ -57,11 +58,61 @@ namespace	Steganography
 			Width = ConvertByteToInt(width, Type);
 			Height = ConvertByteToInt(height, Type);
 		}
-		private int	ConvertByteToInt(List<byte> byteList, Endian type)
+		private int			ConvertByteToInt(List<byte> byteList, Endian type)
 		{
 			if (type == Endian.Big)
 				return (BitConverter.ToInt32(byteList.ToArray(), 0));
 			return (BitConverter.ToInt32(byteList.ToArray(), 3));
+		}
+		private BitArray	ConvertMessageToBitArray(string message)
+		{
+			List<byte> byteList = new List<byte>();
+
+			foreach(char letter in message)
+			{
+				byteList.Add((byte)letter);
+			}
+			byteList.Add((byte)'#');
+			return (new BitArray(byteList.ToArray()));
+		}
+		public byte[]		ConcealMessage(string message, byte[] bytes)
+		{
+			int w;
+			int p;
+			int n;
+			int padding;
+			BitArray	bitMessage;
+			byte		mask;
+
+			mask = (byte)1;
+			bitMessage = ConvertMessageToBitArray(message);
+			w = 0;
+			p = 0;
+			n = 0;
+			padding = 0;
+			for (int i = 0; i < bytes.Length - Offset; i++)
+			{
+				p = (i - 2 * padding) % 3;
+				if (p == 1)
+				{
+					if (n >= bitMessage.Length)
+						break;
+					if (bitMessage[n] == true)
+						bytes[Offset + i] |= mask;
+					else if (bitMessage[n] == false)
+						bytes[Offset + i] &= (byte)~mask;
+					n++;
+				}
+				if (p == 2)
+					w++;
+				if (w == Width)
+				{
+					i = i + 2;
+					padding++;
+					w = 0;
+				}
+			}
+			return (bytes);
 		}
 	}
 }
